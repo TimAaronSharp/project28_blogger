@@ -21,29 +21,32 @@ function setActiveBlog() {
 
 
 <template>
-  <div @click="setActiveBlog()" class="card my-2 blog-overflow">
+  <div @click="setActiveBlog()" class="card my-2">
     <div class="row">
       <div class="col-8">
         <div>
           <div class="card-body">
             <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">{{ blogProp.title
             }}</h5>
-            <p class="card-text blog-body-width" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">{{
+            <p class="card-text blog-overflow" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">{{
               blogProp.body }}
             </p>
           </div>
         </div>
       </div>
-      <div class="col-4">
-        <img class="card-img-start img-fluid rounded-end" :src="blogProp.imgUrl" alt="Card image cap"
+      <div class="col-4 d-flex">
+        <img class="card-img-start img-fluid rounded-end dis-block" :src="blogProp.imgUrl" alt="Card image cap"
           data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">
+        <div class="row">
+          <div class="col-12">
+            <div v-if="account">
+              <img :src="account.picture" alt="IOU one non-broken image" class="profile-img">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!-- <div v-if="account">
-    <img :src="account.picture" alt="IOU one non-broken image">
-  </div> -->
-
   <BlogModal />
 </template>
 
@@ -55,9 +58,20 @@ img {
   object-fit: cover;
 }
 
-.blog-body-width {
-  width: 600px;
+.dis-block {
+  display: block;
 }
+
+.profile-img {
+  height: 3em;
+  object-fit: cover;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+
+// .blog-body-width {
+//   width: 600px;
+// }
 
 .blog-overflow {
   max-height: 40dvh;
