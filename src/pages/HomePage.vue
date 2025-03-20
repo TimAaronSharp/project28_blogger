@@ -1,8 +1,11 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { blogsService } from '@/services/BlogsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
+
+const blogs = computed(() => AppState.blogs)
 
 onMounted(() => {
   getAllBlogs()
@@ -22,7 +25,7 @@ async function getAllBlogs() {
 </script>
 
 <template>
-  <div></div>
+  <div>{{ blogs }}</div>
 </template>
 
 <style scoped lang="scss"></style>
