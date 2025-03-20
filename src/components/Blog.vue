@@ -19,7 +19,8 @@ function setActiveBlog() {
 
 <template>
 
-  <div @click="setActiveBlog()" role="button" class="card my-2 h-50 blog-overflow">
+  <div @click="setActiveBlog()" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button"
+    class="card my-2 h-50 blog-overflow">
     <div class="row">
       <div class="col-8">
         <div>
