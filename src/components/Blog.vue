@@ -3,8 +3,11 @@ import { AppState } from '@/AppState.js';
 import { Blog } from '@/models/Blog.js';
 import BlogModal from './BlogModal.vue';
 import { blogsService } from '@/services/BlogsService.js';
+import { computed } from 'vue';
+import { logger } from '@/utils/Logger.js';
 // import { computed } from 'vue';
 
+const account = computed(() => AppState.account)
 
 const props = defineProps({
   blogProp: { type: Blog, required: true }
@@ -18,23 +21,29 @@ function setActiveBlog() {
 
 
 <template>
-
-  <div @click="setActiveBlog()" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button"
-    class="card my-2 h-50 blog-overflow">
+  <div @click="setActiveBlog()" class="card my-2 blog-overflow">
     <div class="row">
       <div class="col-8">
         <div>
           <div class="card-body">
-            <h5 class="card-title">{{ blogProp.title }}</h5>
-            <p class="card-text">{{ blogProp.body }} </p>
+            <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">{{ blogProp.title
+            }}</h5>
+            <p class="card-text blog-body-width" data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">{{
+              blogProp.body }}
+            </p>
           </div>
         </div>
       </div>
       <div class="col-4">
-        <img class="card-img-start img-fluid rounded-end" :src="blogProp.imgUrl" alt="Card image cap">
+        <img class="card-img-start img-fluid rounded-end" :src="blogProp.imgUrl" alt="Card image cap"
+          data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">
       </div>
     </div>
   </div>
+  <!-- <div v-if="account">
+    <img :src="account.picture" alt="IOU one non-broken image">
+  </div> -->
+
   <BlogModal />
 </template>
 
@@ -46,7 +55,12 @@ img {
   object-fit: cover;
 }
 
+.blog-body-width {
+  width: 600px;
+}
+
 .blog-overflow {
+  max-height: 40dvh;
   overflow: hidden;
   white-space-collapse: collapse;
   text-overflow: ellipsis;
