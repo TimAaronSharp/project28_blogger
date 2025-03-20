@@ -11,6 +11,7 @@ class BlogsService{
     const res = await api.get('api/blogs')
     const blogs = res.data.map(pojo => new Blog(pojo))
     AppState.blogs = blogs
+    logger.log(AppState.blogs)
   }
 
 }

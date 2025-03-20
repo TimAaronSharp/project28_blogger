@@ -4,6 +4,7 @@ import { blogsService } from '@/services/BlogsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
+import Blog from '@/components/Blog.vue';
 
 const blogs = computed(() => AppState.blogs)
 
@@ -25,7 +26,13 @@ async function getAllBlogs() {
 </script>
 
 <template>
-  <div>{{ blogs }}</div>
+  <div class="container">
+    <div class="row">
+      <div v-for="blog in blogs" :key="blog.id" class="col-12">
+        <Blog :blogProp="blog" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
@@ -36,3 +43,8 @@ async function getAllBlogs() {
 "As a user, I can click on a blog to open it into a modal or a new blog page to read the full content of the blog."
 "As a user, I can click on a blog's creator to be taken to the profile page, so that I find more blogs by that user."
 "As a logged in user, I can create and delete blogs, so that I can easily create content to share with others." -->
+
+<!-- <div>{{ blogs }}</div> -->
+<!-- <div v-for="blog in blogs" :key="blog.id">
+    <Blog :someProp="blog" />
+  </div> -->
