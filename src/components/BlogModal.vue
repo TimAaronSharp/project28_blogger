@@ -11,17 +11,16 @@ const blog = computed(() => AppState.activeBlog)
 
 
 <template>
-  <div class="modal" tabindex="-1" id="blogModalId">
+  <div v-if="blog" class="modal" tabindex="-1" id="blogModalId">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+          <!-- <img :src="blog.imgUrl" :alt="`Image for ${blog.title}`"> -->
           <h5 class="modal-title">{{ blog.title }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body modal-scroll">
           <p>{{ blog.body }}</p>
-        </div>
-        <div class="modal-footer">
         </div>
       </div>
     </div>
@@ -29,4 +28,9 @@ const blog = computed(() => AppState.activeBlog)
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modal-scroll {
+  height: 80dvh;
+  overflow-y: auto;
+}
+</style>
