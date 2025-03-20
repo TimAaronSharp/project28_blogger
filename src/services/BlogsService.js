@@ -13,7 +13,10 @@ class BlogsService{
     AppState.blogs = blogs
     logger.log(AppState.blogs)
   }
-
+  setActiveBlog(blogProp) {
+    AppState.activeBlog = blogProp
+    logger.log(AppState.activeBlog)
+  }
 }
 
 export const blogsService = new BlogsService()

@@ -1,19 +1,25 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { Blog } from '@/models/Blog.js';
+import BlogModal from './BlogModal.vue';
+import { blogsService } from '@/services/BlogsService.js';
 // import { computed } from 'vue';
 
 
-defineProps({
+const props = defineProps({
   blogProp: { type: Blog, required: true }
 })
+
+function setActiveBlog() {
+  blogsService.setActiveBlog(props.blogProp)
+}
 
 </script>
 
 
 <template>
 
-  <div class="card my-2 h-50 blog-overflow">
+  <div @click="setActiveBlog()" role="button" class="card my-2 h-50 blog-overflow">
     <div class="row">
       <div class="col-8">
         <div>
@@ -28,6 +34,7 @@ defineProps({
       </div>
     </div>
   </div>
+  <BlogModal />
 </template>
 
 
