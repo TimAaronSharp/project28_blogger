@@ -4,7 +4,7 @@ import { blogsService } from '@/services/BlogsService.js';
 import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
-import Blog from '@/components/Blog.vue';
+import BlogCard from '@/components/BlogCard.vue';
 
 const blogs = computed(() => AppState.blogs)
 
@@ -29,7 +29,7 @@ async function getAllBlogs() {
   <div class="container">
     <div class="row">
       <div v-for="blog in blogs" :key="blog.id" class="col-12">
-        <Blog :blogProp="blog" />
+        <BlogCard :blogProp="blog" />
       </div>
     </div>
   </div>

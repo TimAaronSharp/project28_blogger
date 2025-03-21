@@ -8,7 +8,9 @@ export const AppState = reactive({
   account: null,
 /** @type {import('./models/Blog.js').Blog[]} blogs from the database*/
   blogs: [],
-
-  activeBlog: null
+/** @type {import('./models/Blog.js').Blog} active blog from AppState.blogs*/
+  activeBlog: null,
+/** @type {import('./models/Account.js').Account} ANOTHER PERSON POTENTIALLY SEPARATE FROM THE LOGGED IN USER from the database*/
+  activeProfile: null
 })
 

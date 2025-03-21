@@ -3,12 +3,13 @@ import { AppState } from '@/AppState.js';
 import { Blog } from '@/models/Blog.js';
 import BlogModal from './BlogModal.vue';
 import { blogsService } from '@/services/BlogsService.js';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { logger } from '@/utils/Logger.js';
+import { useRoute } from 'vue-router';
 // import { computed } from 'vue';
 
 const account = computed(() => AppState.account)
-
+const route = useRoute()
 const props = defineProps({
   blogProp: { type: Blog, required: true }
 })
@@ -16,6 +17,10 @@ const props = defineProps({
 function setActiveBlog() {
   blogsService.setActiveBlog(props.blogProp)
 }
+
+// function showAccount() {
+//   logger.log(account.value)
+// }
 
 </script>
 
@@ -37,10 +42,14 @@ function setActiveBlog() {
       <div class="col-4 d-flex">
         <img class="card-img-start img-fluid rounded-end dis-block" :src="blogProp.imgUrl" alt="Card image cap"
           data-bs-toggle="modal" data-bs-target="#blogModalId" role="button">
-        <div class="row">
-          <div class="col-12">
-            <div v-if="account">
-              <img :src="account.picture" alt="IOU one non-broken image" class="profile-img">
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-1">
+          <div v-if="account">
+            <div v-if="route.name != 'Profile'">
+              <RouterLink :to="{ name: 'Profile', params: { profileId: props.blogProp.creatorId } }">
+                <img :src="props.blogProp.creator.picture" alt="IOU one non-broken image" class="profile-img">
+              </RouterLink>
             </div>
           </div>
         </div>
