@@ -5,9 +5,10 @@ import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import BlogCard from '@/components/BlogCard.vue';
-
+//NOTE Computed variables are variables that have an observer watching them and will update us in realtime if they change. You cannot alter a computed through this variable (blogs). You would need a "ref() for that."
 const blogs = computed(() => AppState.blogs)
 
+//NOTE onMounted will run anything inside it when the page/component is mounted ("accessed"? Not 100% certain if this is accurate terminology) to the DOM
 onMounted(() => {
   getAllBlogs()
 })
@@ -28,7 +29,9 @@ async function getAllBlogs() {
 <template>
   <div class="container">
     <div class="row">
+      <!--NOTE v-for iterates over "blogs" (which is the computed AppState.blogs[] so we have reactive access to it), refers to each object it finds in the array as "blog", and binds itself to each ":key" to be able to keep track of it (:key should be unique, so the blog's id is ideal for this). Vue then creates an HTML element (starting at the element the v-for is on) and **everything** inside (nested) that element for each "blog" in "blogs". In this case was have a "BlogCard" component inside.-->
       <div v-for="blog in blogs" :key="blog.id" class="col-12">
+        <!--NOTE :blogProp="blog" is how we send a prop to the child (BlogProp) component. This creates a "prop" which is data that can be sent to the component. The ="blog" is the data we are sending, which in this case is a "blog" object from the "blogs" array. The :blogProp is the key that it will be referred to by in the "BlogCard" component. This key must match it's counterpart in the "defineProps" section we set up in "BlogCard" -->
         <BlogCard :blogProp="blog" />
       </div>
     </div>
@@ -36,15 +39,3 @@ async function getAllBlogs() {
 </template>
 
 <style scoped lang="scss"></style>
-
-
-<!-- "As a user, I can see all the blogs on the home page."
-
-"As a user, I can click on a blog to open it into a modal or a new blog page to read the full content of the blog."
-"As a user, I can click on a blog's creator to be taken to the profile page, so that I find more blogs by that user."
-"As a logged in user, I can create and delete blogs, so that I can easily create content to share with others." -->
-
-<!-- <div>{{ blogs }}</div> -->
-<!-- <div v-for="blog in blogs" :key="blog.id">
-    <Blog :someProp="blog" />
-  </div> -->

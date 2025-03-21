@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 
-// NOTE AppState is a reactive object to contain app level data
+//NOTE AppState is a reactive object to contain app level data
+//NOTE @type {import} tells the app what types of data each of these are so that we can have better intellisense elsewhere in our code.
 export const AppState = reactive({
   /**@type {import('@bcwdev/auth0provider-client').Identity} */
   identity: null,

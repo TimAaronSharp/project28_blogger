@@ -8,12 +8,12 @@ const blog = computed(() => AppState.activeBlog)
 
 
 </script>
-
+<!--NOTE will create notes later if needed -->
 
 <template>
-  <div v-if="blog" class="modal" tabindex="-1" id="blogModalId">
+  <div class="modal" tabindex="-1" id="blogModalId">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div v-if="blog" class="modal-content">
         <div class="modal-header d-block">
           <button type="button" class="d-flex mb-2 btn-close justify-content-end" data-bs-dismiss="modal"
             aria-label="Close"></button>

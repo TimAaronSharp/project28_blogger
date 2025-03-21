@@ -13,7 +13,7 @@ const route = useRoute()
 onMounted(() => {
   getProfileById()
 })
-
+//NOTE watch is an observer that will watch something and then run a callback function if something changes (not sure if we actually need this here for our purposes to be honest)
 watch(route, () => {
   getProfileById()
 })
@@ -35,6 +35,7 @@ async function getProfileById() {
 
 <template>
   <div></div>
+  <!--NOTE v-if here checks if profile is truthy (profile in this case is computed AppState.activeProfile). If this is not here it will error when the page mounts (function is called onMount) because AppState.activeProfile is still falsy (null) when it mounts (even though it runs the function onMount I believe the template does not wait for the script to finish before rendering the HTML) -->
   <section v-if="profile" class="container">
     <div class="row text-center justify-content-center">
       <div class="col-4">
